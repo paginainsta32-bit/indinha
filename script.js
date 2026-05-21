@@ -68,24 +68,35 @@ function gerarEstruturaImagens() {
 /* ==========================================================================
    ANIMAÇÃO DE ABERTURA DA CARTA E AUDIO AUTO-PLAY
    ========================================================================== */
+/* ==========================================================================
+   ANIMAÇÃO DE ABERTURA DA CARTA E AUDIO AUTO-PLAY (ATUALIZADO)
+   ========================================================================== */
 function openEnvelope() {
     const wrapper = document.querySelector('.envelope-wrapper');
+    if (!wrapper) return;
+    
     wrapper.classList.add('open');
+
+    // Tenta tocar imediatamente no primeiro clique
+    tocarMusicaDireto();
+
+    // Se o player do YouTube ainda estiver "com preguiça" ou carregando,
+    // essa linha abaixo tenta empurrar o som de novo 1 segundo depois automaticamente!
+    setTimeout(() => {
+        if (!musicaTocando) {
+            tocarMusicaDireto();
+        }
+    }, 1000);
 
     // Transição cinematográfica após a abertura
     setTimeout(() => {
         const welcomeScreen = document.getElementById('welcome-screen');
         const mainContent = document.getElementById('main-content');
         
-        welcomeScreen.classList.add('fade-out');
-        mainContent.classList.remove('hidden');
+        if (welcomeScreen) welcomeScreen.classList.add('fade-out');
+        if (mainContent) mainContent.classList.remove('hidden');
         
         window.dispatchEvent(new Event('resize'));
-
-        // Dispara o som automaticamente aproveitando o clique de abrir a carta
-        if(playerYT && typeof playerYT.playVideo === 'function' && !musicaTocando) {
-            toggleMúsica();
-        }
     }, 1200);
 }
 
