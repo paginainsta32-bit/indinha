@@ -10,7 +10,7 @@ const CONFIG = {
     
     // ===== CONFIGURAÇÃO DE MÚSICA DO YOUTUBE =====
     nomeMusica: "Vanessa Da Mata - Ainda Bem", // Nome que aparecerá no player
-    youtubeId: "FhmnmC-WuXY",                     // ID do vídeo (letras/números após o v= no link)
+    youtubeId: "h9-LLQqAOXQ",                     // ID do vídeo (letras/números após o v= no link)
     // =============================================
 
     // Texto romântico principal da página
