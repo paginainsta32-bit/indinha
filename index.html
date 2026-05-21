@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para o Meu Amor ❤️</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Fonte Premium -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Canvas para os corações flutuantes de fundo (Roda o tempo todo) -->
+    <canvas id="heartCanvas"></canvas>
+
+    <!-- ========================== TELA INICIAL (A CARTA) ========================== -->
+    <div id="welcome-screen" class="welcome-screen">
+        <div class="envelope-wrapper" onclick="openEnvelope()">
+            <div class="envelope">
+                <div class="flap"></div>
+                <div class="pocket"></div>
+                <div class="letter">
+                    <div class="letter-text">
+                        <h2 id="card-title">Para Alguém Especial</h2>
+                        <p id="card-short-text">Você mudou o meu mundo por completo...</p>
+                    </div>
+                </div>
+                <div class="heart-seal">❤️</div>
+            </div>
+            <p class="click-hint">Clique na carta para abrir ❤️</p>
+        </div>
+    </div>
+
+    <!-- ========================== PÁGINA PRINCIPAL ========================== -->
+    <main id="main-content" class="main-content hidden">
+        
+        <!-- Player de Música Flutuante Premium -->
+        <div class="music-player-container">
+            <div class="music-info">
+                <span class="music-icon">🎵</span>
+                <div class="music-text">
+                    <span id="music-title" class="music-title">Carregando música...</span>
+                    <span class="music-subtitle">Nossa Trilha Sonora</span>
+                </div>
+            </div>
+            <button id="play-pause-btn" class="play-btn" onclick="toggleMúsica()">▶</button>
+        </div>
+
+        <!-- Cabeçalho / Título do Casal -->
+        <header class="hero-header">
+            <h1 id="couple-names" class="couple-title">Nome & Nome</h1>
+            <p class="subtitle">Nossa história de amor em cada detalhe</p>
+        </header>
+
+        <!-- Slider Principal (Estilo Netflix/Instagram) -->
+        <section class="slider-container">
+            <div class="slider-wrapper" id="main-slider">
+                <!-- Injetado dinamicamente pelo JS -->
+            </div>
+            <button class="slider-btn prev-btn" onclick="moveSlide(-1)">&#10094;</button>
+            <button class="slider-btn next-btn" onclick="moveSlide(1)">&#10095;</button>
+            <div class="slider-dots" id="slider-dots">
+                <!-- Injetado dinamicamente pelo JS -->
+            </div>
+        </section>
+
+        <!-- Contador de Tempo Real -->
+        <section class="counter-section scroll-reveal">
+            <h2>Estamos juntos há...</h2>
+            <div class="counter-container">
+                <div class="counter-box"><span id="years">00</span><label>Anos</label></div>
+                <div class="counter-box"><span id="months">00</span><label>Meses</label></div>
+                <div class="counter-box"><span id="days">00</span><label>Dias</label></div>
+                <div class="counter-box"><span id="hours">00</span><label>Horas</label></div>
+                <div class="counter-box"><span id="minutes">00</span><label>Minutos</label></div>
+                <div class="counter-box"><span id="seconds">00</span><label>Segundos</label></div>
+                <div class="counter-box ms-box"><span id="milliseconds">000</span><label>Milésimos</label></div>
+            </div>
+        </section>
+
+        <!-- Galeria Horizontal Arrastável -->
+        <section class="gallery-section scroll-reveal">
+            <h2>Nossos Momentos Favoritos</h2>
+            <div class="gallery-scroll" id="horizontal-gallery">
+                <!-- Injetado dinamicamente pelo JS -->
+            </div>
+            <p class="scroll-tip">➔ Arraste ou deslize para o lado para ver mais</p>
+        </section>
+
+        <!-- Seção de Texto Apaixonante (Glassmorphism) -->
+        <section class="love-letter-section scroll-reveal">
+            <div class="glass-card">
+                <div class="sparkle"></div>
+                <h3>Minha Promessa para Você</h3>
+                <p id="main-love-text">
+                    <!-- Injetado dinamicamente pelo JS -->
+                </p>
+                <span class="signature">Com todo o meu amor, para sempre. ❤️</span>
+            </div>
+        </section>
+
+        <!-- Rodapé Discreto -->
+        <footer>
+            <p>Feito com ❤️ para o amor da minha vida</p>
+        </footer>
+
+    </main>
+
+    <!-- Player oculto do YouTube carregado via API -->
+    <div id="youtube-audio-player" style="position: absolute; top: -9999px; left: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none;"></div>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,644 @@
+﻿/* ==========================================================================
+   CONFIGURAÇÕES GERAIS E PALETA DE CORES (PREMIUM BLACK, DARK RED & PINK)
+   ========================================================================== */
+:root {
+    --bg-dark: #0a0505;
+    --bg-card: rgba(20, 10, 10, 0.65);
+    --primary-red: #990011;
+    --neon-glow: #ff2a4b;
+    --pink-soft: #ffb3c1;
+    --text-light: #f7edf0;
+    --glass-border: rgba(255, 42, 75, 0.2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* Canvas de Corações em Segundo Plano */
+#heartCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* ==========================================================================
+   TELA INICIAL - A CARTINHA ANIMADA
+   ========================================================================== */
+.welcome-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), visibility 1s;
+}
+
+.envelope-wrapper {
+    cursor: pointer;
+    position: relative;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.envelope-wrapper:hover {
+    transform: scale(0.95);
+}
+
+.envelope {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    background-color: #800008;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 30px rgba(153, 0, 17, 0.3);
+}
+
+.flap {
+    position: absolute;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-top: 110px solid #990011;
+    transform-origin: top;
+    transition: transform 0.5s ease 0.3s;
+    z-index: 3;
+}
+
+.pocket {
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 150px solid #660005;
+    border-right: 150px solid #660005;
+    border-bottom: 100px solid #730006;
+    border-radius: 0 0 8px 8px;
+    z-index: 2;
+}
+
+.letter {
+    position: absolute;
+    bottom: 10px;
+    left: 15px;
+    width: 270px;
+    height: 170px;
+    background: #fff;
+    border-radius: 4px;
+    padding: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: transform 0.6s ease;
+    z-index: 1;
+    color: #333;
+}
+
+.letter-text {
+    text-align: center;
+}
+
+.letter-text h2 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.8rem;
+    color: var(--primary-red);
+    margin-bottom: 10px;
+}
+
+.letter-text p {
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+.heart-seal {
+    position: absolute;
+    top: 90px;
+    left: 135px;
+    width: 30px;
+    height: 30px;
+    font-size: 24px;
+    text-align: center;
+    line-height: 30px;
+    z-index: 4;
+    transition: transform 0.5s ease, opacity 0.3s ease 0.3s;
+    text-shadow: 0 0 10px var(--neon-glow);
+}
+
+.click-hint {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    color: var(--pink-soft);
+    animation: pulse 1.5s infinite alternate;
+}
+
+/* Animação de Abertura da Carta */
+.envelope-wrapper.open .flap {
+    transform: rotateX(180deg);
+    z-index: 0;
+}
+
+.envelope-wrapper.open .letter {
+    transform: translateY(-80px);
+    z-index: 2;
+}
+
+.envelope-wrapper.open .heart-seal {
+    transform: scale(0);
+    opacity: 0;
+}
+
+.welcome-screen.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* ==========================================================================
+   PLAYER DE MÚSICA PREMIUM (ESTILO TIKTOK)
+   ========================================================================== */
+.music-player-container {
+    background: rgba(20, 10, 10, 0.75);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 12px 20px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 320px;
+    margin: 20px auto 0 auto;
+    box-shadow: 0 10px 30px rgba(255, 42, 75, 0.15);
+    z-index: 100;
+    position: relative;
+}
+
+.music-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.music-icon {
+    font-size: 1.4rem;
+    animation: pulse 1.2s infinite alternate;
+}
+
+.music-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.music-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #fff;
+    max-width: 180px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.music-subtitle {
+    font-size: 0.7rem;
+    color: var(--pink-soft);
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 2px;
+}
+
+.play-btn {
+    background: var(--neon-glow);
+    border: none;
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 0 10px rgba(255, 42, 75, 0.4);
+    padding-left: 2px;
+}
+
+.play-btn.pausado {
+    padding-left: 0;
+    background: #fff;
+    color: var(--bg-dark);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+}
+
+.play-btn:hover {
+    transform: scale(1.08);
+}
+
+/* ==========================================================================
+   PÁGINA PRINCIPAL E ESTRUTURA PREMIUM
+   ========================================================================== */
+.main-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    opacity: 1;
+    transition: opacity 1s ease;
+}
+
+.hidden {
+    display: none;
+    opacity: 0;
+}
+
+.hero-header {
+    text-align: center;
+    margin: 30px 0 30px 0;
+}
+
+.couple-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: 4rem;
+    background: linear-gradient(45deg, #fff, var(--pink-soft), var(--neon-glow));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(255, 42, 75, 0.2);
+}
+
+.subtitle {
+    font-size: 0.9rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--pink-soft);
+    opacity: 0.8;
+    margin-top: 5px;
+}
+
+/* ==========================================================================
+   SLIDER AUTOMÁTICO (PROPORÇÃO DE TELA DE CELULAR INTEGRAL SEM CORTES)
+   ========================================================================== */
+.slider-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px; /* Enquadramento simulando tamanho ideal de celular */
+    aspect-ratio: 9 / 16; /* Proporção exata estilo Reels/TikTok */
+    height: auto;
+    margin: 0 auto 50px auto;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 25px rgba(255, 42, 75, 0.15);
+}
+
+.slider-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.slide-item {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+}
+
+.slide-item.active {
+    opacity: 1;
+}
+
+.slide-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Encaixa a foto inteira perfeitamente dentro do espaço */
+    background-color: #0a0505;
+}
+
+.slide-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 25%;
+    background: linear-gradient(to top, rgba(10,5,5,0.7), transparent);
+    pointer-events: none;
+}
+
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: white;
+    font-size: 1.5rem;
+    padding: 12px 18px;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 10;
+    transition: background 0.3s, transform 0.2s;
+    backdrop-filter: blur(5px);
+}
+
+.slider-btn:hover {
+    background: var(--primary-red);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.prev-btn { left: 20px; }
+.next-btn { right: 20px; }
+
+.slider-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    cursor: pointer;
+    transition: width 0.3s, background 0.3s;
+}
+
+.dot.active {
+    width: 24px;
+    border-radius: 4px;
+    background: var(--neon-glow);
+    box-shadow: 0 0 10px var(--neon-glow);
+}
+
+/* ==========================================================================
+   CONTADOR DE TEMPO EM REAL-TIME
+   ========================================================================== */
+.counter-section {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.counter-section h2 {
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--pink-soft);
+    margin-bottom: 25px;
+}
+
+.counter-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 0 10px;
+}
+
+.counter-box {
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    padding: 15px 20px;
+    border-radius: 15px;
+    min-width: 100px;
+    flex: 1;
+    max-width: 130px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    transition: transform 0.3s;
+}
+
+.counter-box:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 42, 75, 0.5);
+}
+
+.counter-box span {
+    display: block;
+    font-size: 2rem;
+    font-weight: 600;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 42, 75, 0.4);
+}
+
+.counter-box label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--pink-soft);
+    opacity: 0.8;
+}
+
+.counter-box.ms-box {
+    max-width: 150px;
+    min-width: 120px;
+}
+.counter-box.ms-box span {
+    color: var(--pink-soft);
+}
+
+/* ==========================================================================
+   GALERIA HORIZONTAL ARRASTÁVEL
+   ========================================================================== */
+.gallery-section {
+    margin-bottom: 60px;
+    padding: 0 10px;
+}
+
+.gallery-section h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--pink-soft);
+    margin-bottom: 25px;
+}
+
+.gallery-scroll {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 20px 10px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    cursor: grab;
+}
+
+.gallery-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.gallery-item {
+    flex: 0 0 280px;
+    height: 380px;
+    border-radius: 18px;
+    overflow: hidden;
+    scroll-snap-align: start;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+.gallery-item:hover {
+    transform: scale(1.03) translateY(-5px);
+    box-shadow: 0 20px 40px rgba(255, 42, 75, 0.2);
+    border-color: var(--glass-border);
+}
+
+.scroll-tip {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--pink-soft);
+    opacity: 0.5;
+    margin-top: 10px;
+}
+
+/* ==========================================================================
+   SEÇÃO TEXTO APAIXONANTE (GLASSMORPHISM)
+   ========================================================================== */
+.love-letter-section {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 60px;
+    padding: 0 15px;
+}
+
+.glass-card {
+    position: relative;
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: 40px 30px;
+    border-radius: 24px;
+    max-width: 750px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.6), inset 0 0 20px rgba(255, 42, 75, 0.05);
+    overflow: hidden;
+}
+
+.glass-card h3 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.8rem;
+    color: var(--pink-soft);
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(255, 179, 193, 0.3);
+}
+
+.glass-card p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #e0d5d7;
+    font-weight: 300;
+    margin-bottom: 25px;
+    text-align: justify;
+}
+
+.signature {
+    display: block;
+    font-family: 'Great Vibes', cursive;
+    font-size: 2rem;
+    color: var(--neon-glow);
+    margin-top: 15px;
+}
+
+.glass-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,42,75,0.05) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+/* ==========================================================================
+   EFEITOS DE ANIMAÇÃO E REVEAL
+   ========================================================================== */
+@keyframes pulse {
+    from { transform: scale(1); opacity: 0.7; }
+    to { transform: scale(1.05); opacity: 1; }
+}
+
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.scroll-reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+footer {
+    text-align: center;
+    padding: 30px 0;
+    font-size: 0.8rem;
+    opacity: 0.4;
+    letter-spacing: 1px;
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE COMPLETA
+   ========================================================================== */
+@media (max-width: 768px) {
+    .couple-title { font-size: 2.8rem; }
+    .counter-container { gap: 10px; }
+    
+    .counter-box {
+        min-width: 80px;
+        padding: 10px 5px;
+    }
+    .counter-box span { font-size: 1.4rem; }
+    .counter-box label { font-size: 0.65rem; }
+    .counter-box.ms-box { min-width: 90px; }
+
+    .glass-card { padding: 30px 20px; }
+    .glass-card h3 { font-size: 2.2rem; }
+    .glass-card p { font-size: 0.95rem; line-height: 1.6; }
+    
+    .slider-btn { padding: 8px 12px; font-size: 1.2rem; }
+    .prev-btn { left: 10px; }
+    .next-btn { right: 10px; }
+}
