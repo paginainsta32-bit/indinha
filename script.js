@@ -9,8 +9,8 @@ const CONFIG = {
     resumoCarta: "Clique aqui, preparei uma surpresa para você... ❤️", 
     
     // ===== CONFIGURAÇÃO DE MÚSICA DO YOUTUBE =====
-    nomeMusica: "De Janeiro a Janeiro - Roberta Campos", // Nome que aparecerá no player
-    youtubeId: "8S7LgS7T2_E",                     // ID do vídeo (letras/números após o v= no link)
+    nomeMusica: "Vanessa Da Mata - Ainda Bem", // Nome que aparecerá no player
+    youtubeId: "FhmnmC-WuXY&list",                     // ID do vídeo (letras/números após o v= no link)
     // =============================================
 
     // Texto romântico principal da página
